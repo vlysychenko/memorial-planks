@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "language".
@@ -38,8 +39,8 @@ class Language extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['url', 'locale', 'title', 'created_at', 'updated_at'], 'required'],
-            [['default', 'created_at', 'updated_at'], 'integer'],
+            [['url', 'locale', 'title'], 'required'],
+            [['default'], 'boolean'],
             [['url', 'locale', 'title'], 'string', 'max' => 255]
         ];
     }
@@ -58,6 +59,29 @@ class Language extends \yii\db\ActiveRecord
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),
         ];
+    }
+ 
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
+{
+    return [
+        TimestampBehavior::className(),
+    ];
+}
+
+    /**
+     * @inheritdoc
+     */
+    public function afterSave($insert, $changedAttributes) {
+        parent::afterSave($insert, $changedAttributes);
+        if ($this->default == true) {
+            Yii::$app->db->createCommand()
+                    ->update(self::tableName(), [
+                        'default' => 0
+                            ], 'id != :id', [':id' => $this->id])->execute();
+        }
     }
 
     /**
