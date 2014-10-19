@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "cea7d8284021060550e1fd14b9fa178d",
+    "hash": "c81aa07fe4c00ce874a2aafbdaa36275",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -593,6 +593,102 @@
                 "yii2"
             ],
             "time": "2014-10-12 17:09:06"
+        },
+        {
+            "name": "zelenin/yii2-i18n-module",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zelenin/yii2-i18n-module.git",
+                "reference": "75ee3f15f0874387c6cb106cf8b67fda6e2c2312"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zelenin/yii2-i18n-module/zipball/75ee3f15f0874387c6cb106cf8b67fda6e2c2312",
+                "reference": "75ee3f15f0874387c6cb106cf8b67fda6e2c2312",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0",
+                "yiisoft/yii2": "*",
+                "zelenin/yii2-widgets": "0.0.*"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "bootstrap": "Zelenin\\yii\\modules\\I18n\\Bootstrap"
+            },
+            "autoload": {
+                "psr-4": {
+                    "Zelenin\\yii\\modules\\I18n\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Aleksandr Zelenin",
+                    "email": "aleksandr@zelenin.me",
+                    "homepage": "http://zelenin.me",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Yii2 i18n (internalization) module makes the translation of your application so simple",
+            "homepage": "https://github.com/zelenin/yii2-i18n-module",
+            "keywords": [
+                "i18n",
+                "translation",
+                "translations",
+                "yii2"
+            ],
+            "time": "2014-10-04 23:16:27"
+        },
+        {
+            "name": "zelenin/yii2-widgets",
+            "version": "0.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zelenin/yii2-widgets.git",
+                "reference": "2b4ac9d2056c5c493afa9880e8b911948cfbe780"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zelenin/yii2-widgets/zipball/2b4ac9d2056c5c493afa9880e8b911948cfbe780",
+                "reference": "2b4ac9d2056c5c493afa9880e8b911948cfbe780",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0",
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "Zelenin\\yii\\widgets\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Aleksandr Zelenin",
+                    "email": "aleksandr@zelenin.me",
+                    "homepage": "http://zelenin.me",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Yii2 widgets",
+            "homepage": "https://github.com/zelenin/yii2-widgets",
+            "keywords": [
+                "alert",
+                "error",
+                "widgets",
+                "yii2"
+            ],
+            "time": "2014-10-05 00:00:00"
         }
     ],
     "packages-dev": [
@@ -896,7 +992,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "zelenin/yii2-i18n-module": 20
+    },
     "prefer-stable": false,
     "platform": {
         "php": ">=5.4.0"
