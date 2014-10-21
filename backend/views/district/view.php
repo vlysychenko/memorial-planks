@@ -32,6 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'city_id',
             'created_at:datetime',
             'updated_at:datetime',
+            'translation.title',
         ],
     ]) ?>
 

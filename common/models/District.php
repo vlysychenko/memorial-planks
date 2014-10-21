@@ -58,6 +58,7 @@ class District extends \yii\db\ActiveRecord
     public function behaviors() {
         return [
             TimestampBehavior::className(),
+            \common\behaviors\TranslationBehavior::className()
         ];
     }
 
