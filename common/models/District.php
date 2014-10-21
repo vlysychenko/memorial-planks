@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "district".
@@ -33,7 +34,7 @@ class District extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['city_id', 'created_at', 'updated_at'], 'required'],
+            [['city_id'], 'required'],
             [['city_id', 'created_at', 'updated_at'], 'integer']
         ];
     }
@@ -48,6 +49,15 @@ class District extends \yii\db\ActiveRecord
             'city_id' => Yii::t('app', 'City ID'),
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),
+        ];
+    }
+    
+    /**
+     * @inheritdoc
+     */
+    public function behaviors() {
+        return [
+            TimestampBehavior::className(),
         ];
     }
 
