@@ -2,7 +2,6 @@
 
 namespace common\behaviors;
 
-use common\models\Language;
 use yii\base\Behavior;
 
 /**

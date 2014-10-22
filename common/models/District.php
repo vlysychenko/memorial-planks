@@ -17,6 +17,7 @@ use yii\behaviors\TimestampBehavior;
  * @property City $city
  * @property DistrictBorderNode[] $districtBorderNodes
  * @property DistrictLang[] $districtLangs
+ * @property DistrictLang $translation
  */
 class District extends \yii\db\ActiveRecord
 {

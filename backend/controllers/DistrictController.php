@@ -2,12 +2,14 @@
 
 namespace backend\controllers;
 
-use Yii;
-use common\models\District;
 use backend\models\search\DistrictSearch;
+use common\models\District;
+use common\models\DistrictLang;
+use common\models\Language;
+use Yii;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * DistrictController implements the CRUD actions for District model.
@@ -61,12 +63,25 @@ class DistrictController extends Controller
     public function actionCreate()
     {
         $model = new District();
+        
+        $languages = Language::find()->all();
+        $translations = [];
+        foreach ($languages as $language){
+            $translations[] = new DistrictLang(['language_id' => $language->id]);
+        }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            if(DistrictLang::loadMultiple($translations, Yii::$app->request->post())){
+                foreach($translations as $translation){
+                    $model->link('districtLangs', $translation);
+                }
+            }
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'translations' => $translations,
+                'languages' => \yii\helpers\ArrayHelper::index($languages, 'id'),
             ]);
         }
     }

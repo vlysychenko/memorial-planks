@@ -33,7 +33,6 @@ class DistrictLang extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'language_id', 'district_id', 'created_at', 'updated_at'], 'required'],
             [['language_id', 'district_id', 'created_at', 'updated_at'], 'integer'],
             [['title'], 'string', 'max' => 255]
         ];
@@ -54,6 +53,15 @@ class DistrictLang extends \yii\db\ActiveRecord
         ];
     }
 
+     /**
+     * @inheritdoc
+     */
+    public function behaviors() {
+        return [
+            \yii\behaviors\TimestampBehavior::className(),
+        ];
+    }
+    
     /**
      * @return \yii\db\ActiveQuery
      */
