@@ -7,7 +7,9 @@ use common\models\District;
 use common\models\DistrictLang;
 use common\models\Language;
 use Yii;
+use yii\base\Model;
 use yii\filters\VerbFilter;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 
@@ -70,18 +72,19 @@ class DistrictController extends Controller
             $translations[] = new DistrictLang(['language_id' => $language->id]);
         }
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            if(DistrictLang::loadMultiple($translations, Yii::$app->request->post())){
-                foreach($translations as $translation){
-                    $model->link('districtLangs', $translation);
-                }
+        if ($model->load(Yii::$app->request->post())
+                && DistrictLang::loadMultiple($translations, Yii::$app->request->post())
+                && Model::validateMultiple(array_merge([$model], $translations))
+                && $model->save(false)) {
+            foreach($translations as $translation){
+                $model->link('districtLangs', $translation);
             }
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
                 'translations' => $translations,
-                'languages' => \yii\helpers\ArrayHelper::index($languages, 'id'),
+                'languages' => ArrayHelper::index($languages, 'id'),
             ]);
         }
     }
@@ -96,11 +99,20 @@ class DistrictController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())
+                && DistrictLang::loadMultiple($model->districtLangs,
+                    Yii::$app->request->post())
+                && Model::validateMultiple(array_merge([$model], $model->districtLangs))
+                && $model->save(false)) {
+            foreach($model->districtLangs as $translation){
+                $translation->save();
+            }
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
+                'translations' => $model->districtLangs,
+                'languages' => ArrayHelper::index(Language::find()->all(), 'id'),
             ]);
         }
     }
