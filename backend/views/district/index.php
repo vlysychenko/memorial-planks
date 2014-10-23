@@ -29,7 +29,12 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'translation.title',
-            'city_id',
+            [
+                'class' => yii\grid\DataColumn::className(),
+                //not sure how attribute label should be obtained here
+                'label' => $searchModel->getAttributeLabel('city_id'),
+                'attribute' => 'city.translation.title',
+            ],
             'created_at:datetime',
             'updated_at:datetime',
 

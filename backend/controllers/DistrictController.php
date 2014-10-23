@@ -3,6 +3,7 @@
 namespace backend\controllers;
 
 use backend\models\search\DistrictSearch;
+use common\models\City;
 use common\models\District;
 use common\models\DistrictLang;
 use common\models\Language;
@@ -81,10 +82,12 @@ class DistrictController extends Controller
             }
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
+            $cities = ArrayHelper::map(City::find()->all(), 'id', 'translation.title');
             return $this->render('create', [
                 'model' => $model,
                 'translations' => $translations,
                 'languages' => ArrayHelper::index($languages, 'id'),
+                'cities' => $cities,
             ]);
         }
     }
@@ -109,10 +112,12 @@ class DistrictController extends Controller
             }
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
+            $cities = ArrayHelper::map(City::find()->all(), 'id', 'translation.title');
             return $this->render('update', [
                 'model' => $model,
                 'translations' => $model->districtLangs,
                 'languages' => ArrayHelper::index(Language::find()->all(), 'id'),
+                'cities' => $cities,
             ]);
         }
     }

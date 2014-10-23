@@ -29,7 +29,10 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'city_id',
+            [
+                'label' => $model->getAttributeLabel('city_id'),
+                'value' => $model->city->translation->title,
+            ],
             'created_at:datetime',
             'updated_at:datetime',
             'translation.title',

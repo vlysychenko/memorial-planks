@@ -15,6 +15,7 @@ use Yii;
  * @property CityLang[] $cityLangs
  * @property District[] $districts
  * @property Street[] $streets
+ * @property CityLang $translation
  */
 class City extends \yii\db\ActiveRecord
 {
@@ -46,6 +47,16 @@ class City extends \yii\db\ActiveRecord
             'id' => Yii::t('app', 'ID'),
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),
+        ];
+    }
+    
+    /**
+     * @inheritdoc
+     */
+    public function behaviors() {
+        return [
+            \yii\behaviors\TimestampBehavior::className(),
+            \common\behaviors\TranslationBehavior::className()
         ];
     }
 

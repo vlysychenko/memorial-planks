@@ -8,13 +8,14 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 /* @var $translations common\models\DistrictLang[] */
 /* @var $languages common\models\Language[] */
+/* @var $cities common\models\City[] */
 ?>
 
 <div class="district-form">
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'city_id')->textInput() ?>
+    <?= $form->field($model, 'city_id')->dropDownList($cities) ?>
 
     <?php foreach($translations as $index => $translation): ?>
         <?= $form->field($translation, 'title')
